@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # epel, puppet, python27, postgres yum repos
-yum -y install http://ftp.uninett.no/linux/epel/6/i386/epel-release-6-8.noarch.rpm
+yum -y install epel-release
 yum -y install https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
 yum -y install https://www.softwarecollections.org/en/scls/rhscl/python27/epel-6-x86_64/download/rhscl-python27-epel-6-x86_64.noarch.rpm
 yum -y install http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-redhat91-9.1-5.noarch.rpm
