@@ -9,3 +9,6 @@ make install
 /usr/local/bin/ruby-install --system ruby
 /usr/local/bin/gem install fpm-cookery --no-document
 
+echo To build, as root, run
+echo
+echo /usr/local/bin/fpm-cook --tmp-root /tmp
