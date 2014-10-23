@@ -14,8 +14,8 @@ class Python27 < FPM::Cookery::Recipe
   build_depends 'scl-utils', 'epel-release'
 
   def build
-    safesystem 'yum -y install http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-redhat91-9.1-5.noarch.rpm'
-    safesystem 'yum -y install https://www.softwarecollections.org/en/scls/rhscl/python27/epel-6-x86_64/download/rhscl-python27-epel-6-x86_64.noarch.rpm'
+    safesystem 'yum -y install http://yum.postgresql.org/9.1/redhat/rhel-6-x86_64/pgdg-redhat91-9.1-5.noarch.rpm || exit 0'
+    safesystem 'yum -y install https://www.softwarecollections.org/en/scls/rhscl/python27/epel-6-x86_64/download/rhscl-python27-epel-6-x86_64.noarch.rpm || exit 0'
   end
 
   def install
