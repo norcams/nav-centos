@@ -32,11 +32,15 @@ class Nav < FPM::Cookery::Recipe
     safesystem "source /opt/rh/python27/enable; \
                 source /usr/local/nav/bin/activate; \
                 ./configure --prefix=/usr/local/nav --sysconfdir=/etc/nav"
-    make
+    safesystem "source /opt/rh/python27/enable; \
+                source /usr/local/nav/bin/activate; \
+                make"
   end
 
   def install
-    make :install
+    safesystem "source /opt/rh/python27/enable; \
+                source /usr/local/nav/bin/activate; \
+                make install"
   end
 end
 
