@@ -23,6 +23,7 @@ class Nav < FPM::Cookery::Recipe
 
   def build
     safesystem 'sed -i \'/xmpppy/d\' requirements.txt'
+    safesystem 'gem install sass --no-ri --no-rdoc'
     safesystem "source /opt/rh/python27/enable; virtualenv /usr/local/nav"
     safesystem "source /opt/rh/python27/enable; \
                 source /usr/local/nav/bin/activate; \
