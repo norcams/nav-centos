@@ -41,6 +41,7 @@ class Nav < FPM::Cookery::Recipe
     safesystem "source /opt/rh/python27/enable; \
                 source /usr/local/nav/bin/activate; \
                 make install"
+    etc('nav'). install Dir['nav/*']
   end
 end
 
