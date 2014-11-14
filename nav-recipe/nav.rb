@@ -28,10 +28,14 @@ class Nav < FPM::Cookery::Recipe
                 source /usr/local/nav/bin/activate; \
                 env PATH=$PATH:/usr/pgsql-9.1/bin \
                 pip install -r requirements.txt"
+    safesystem "source /opt/rh/python27/enable; \
+                source /usr/local/nav/bin/activate; \
+                ./configure --prefix=/usr/local/nav --sysconfdir=/etc/nav"
+    make
   end
 
   def install
-    # nothing yet!
+    make :install
   end
 end
 
