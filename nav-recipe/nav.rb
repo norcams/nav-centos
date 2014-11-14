@@ -31,7 +31,7 @@ class Nav < FPM::Cookery::Recipe
                 pip install -r requirements.txt"
     safesystem "source /opt/rh/python27/enable; \
                 source /usr/local/nav/bin/activate; \
-                ./configure --prefix=/usr/local/nav --sysconfdir=/etc/nav"
+                ./configure --prefix=/usr/local/nav"
     safesystem "source /opt/rh/python27/enable; \
                 source /usr/local/nav/bin/activate; \
                 make"
@@ -41,7 +41,7 @@ class Nav < FPM::Cookery::Recipe
     safesystem "source /opt/rh/python27/enable; \
                 source /usr/local/nav/bin/activate; \
                 make install"
-    etc('nav'). install Dir['nav/*']
   end
+
 end
 
