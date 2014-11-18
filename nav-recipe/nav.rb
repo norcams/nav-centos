@@ -14,7 +14,7 @@ class Nav < FPM::Cookery::Recipe
   source      'https://launchpad.net/nav/4.1/4.1.1/+download/nav-4.1.1.tar.gz'
   sha256      'e269075a30be8d8a4da9546550ed7fa40b76de4ee42b8d34c5db17b1689d228f'
 
-  build_depends 'python27',
+  build_depends 'python27', 'rubygems',
                 'automake', 'gcc', 'gcc-c++',
                 'subversion', 'openldap-devel',
                 'postgresql91-devel'
