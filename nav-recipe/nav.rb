@@ -9,10 +9,10 @@ class Nav < FPM::Cookery::Recipe
   license     'GNU GPL v2'
   section     'Utilities'
 
-  version     '4.1.1'
+  version     '4.1.2'
   revision    '1'
-  source      'https://launchpad.net/nav/4.1/4.1.1/+download/nav-4.1.1.tar.gz'
-  sha256      'e269075a30be8d8a4da9546550ed7fa40b76de4ee42b8d34c5db17b1689d228f'
+  source      'https://launchpad.net/nav/4.1/4.1.2/+download/nav-4.1.2.tar.gz'
+  sha256      '066133f78b250dfe9834a992e4a0f646fd78594eeb944dd17165e5ed4c2df561'
 
   build_depends 'python27', 'rubygems',
                 'automake', 'gcc', 'gcc-c++',
@@ -22,19 +22,30 @@ class Nav < FPM::Cookery::Recipe
   depends 'python27'
 
   def build
+    # remove xmpp support
     safesystem 'sed -i \'/xmpppy/d\' requirements.txt'
+
     safesystem 'gem install sass --no-ri --no-rdoc'
-    safesystem "source /opt/rh/python27/enable; virtualenv /usr/local/nav"
+
+    safesystem "source /opt/rh/python27/enable; \
+                virtualenv /usr/local/nav"
+
     safesystem "source /opt/rh/python27/enable; \
                 source /usr/local/nav/bin/activate; \
                 env PATH=$PATH:/usr/pgsql-9.1/bin \
                 pip install -r requirements.txt"
+
     safesystem "source /opt/rh/python27/enable; \
                 source /usr/local/nav/bin/activate; \
-                ./configure --prefix=/usr/local/nav"
+                ./configure"
+
     safesystem "source /opt/rh/python27/enable; \
                 source /usr/local/nav/bin/activate; \
                 make"
+
+    # Add lib/python to the search path/env
+    safesystem "echo ../../python > \
+                /usr/local/nav/lib/python2.7/site-packages/nav.pth"
   end
 
   def install
