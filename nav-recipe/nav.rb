@@ -23,7 +23,14 @@ class Nav < FPM::Cookery::Recipe
 
   def build
     # remove xmpp support
-    safesystem 'sed -i \'/xmpppy/d\' requirements.txt'
+    # safesystem 'sed -i \'/xmpppy/d\' requirements.txt'
+
+    # fix xmpp
+    safesystem 'sed -i "s/\(^xmpppy\).*/\1==0.5.0rc1/" requirements.txt'
+
+    # use pysnmp-se instead
+    safesystem 'sed -i "s/\(.*pynetsnmp-.*\)/#\1/" requirements.txt; \
+                sed -i "s/^#\(.*pysnmp-se.*\)/\1/" requirements.txt'
 
     safesystem 'gem install sass --no-ri --no-rdoc'
 

@@ -13,14 +13,13 @@ class Graphite < FPM::Cookery::Recipe
   revision    '1'
   source      '', :with => :noop
 
-  build_depends 'python27', 'automake', 'gcc', 'gcc-c++'
-  depends 'python27'
+  build_depends 'python', 'python-virtualenv', 'automake', 'gcc', 'gcc-c++'
+  depends 'python', 'pycairo'
 
   def build
-    safesystem 'source /opt/rh/python27/enable; virtualenv /opt/graphite'
-    safesystem 'source /opt/rh/python27/enable; \
-                source /opt/graphite/bin/activate; \
-                pip install whisper carbon graphite-web django-tagging'
+    safesystem 'virtualenv /opt/graphite'
+    safesystem 'source /opt/graphite/bin/activate; \
+                pip install whisper twisted django==1.4.16 carbon graphite-web django-tagging'
   end
 
   def install

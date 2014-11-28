@@ -5,7 +5,7 @@ class NavOmnibus < FPM::Cookery::Recipe
   name 'nav-omnibus'
   version '4.1.2'
   description 'NAV omnibus package'
-  revision 1
+  revision 8
   maintainer '<code@beddari.net>'
   license 'Apache 2.0 License'
 
@@ -15,7 +15,8 @@ class NavOmnibus < FPM::Cookery::Recipe
   omnibus_dir     '/usr/local/nav'
   omnibus_recipes 'repositories',
                   'nav',
-                  'graphite'
+                  'graphite',
+                  'mod_wsgi'
 
   omnibus_additional_paths '/opt/graphite'
 
