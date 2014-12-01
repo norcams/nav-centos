@@ -32,7 +32,7 @@ class Nav < FPM::Cookery::Recipe
     safesystem 'sed -i "s/\(.*pynetsnmp-.*\)/#\1/" requirements.txt; \
                 sed -i "s/^#\(.*pysnmp-se.*\)/\1/" requirements.txt'
 
-    safesystem 'gem install sass --no-ri --no-rdoc'
+    safesystem 'gem install sass --no-ri --no-rdoc --version "3.3.9"'
 
     safesystem "source /opt/rh/python27/enable; \
                 virtualenv /usr/local/nav"

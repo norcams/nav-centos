@@ -5,7 +5,7 @@ class NavOmnibus < FPM::Cookery::Recipe
   name 'nav-omnibus'
   version '4.1.2'
   description 'NAV omnibus package'
-  revision 8
+  revision 9
   maintainer '<code@beddari.net>'
   license 'Apache 2.0 License'
 
