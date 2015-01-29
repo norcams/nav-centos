@@ -3,16 +3,17 @@ class Nav < FPM::Cookery::Recipe
   # Package metadata
   name        'nav'
 
-  description 'Network Administration Visualized'
-  homepage    'http://nav.uninett.no'
-  maintainer  'code@beddari.net'
-  license     'GNU GPL v2'
-  section     'Utilities'
+  description   'Network Administration Visualized'
+  homepage      'http://nav.uninett.no'
+  maintainer    'code@beddari.net'
+  license       'GNU GPL v2'
+  section       'Utilities'
 
-  version     '4.1.2'
-  revision    '1'
-  source      'https://launchpad.net/nav/4.1/4.1.2/+download/nav-4.1.2.tar.gz'
-  sha256      '066133f78b250dfe9834a992e4a0f646fd78594eeb944dd17165e5ed4c2df561'
+  version       '4.1.2'
+  revision      '1'
+  source        'https://launchpad.net/nav/4.1/4.1.2/+download/nav-4.1.2.tar.gz'
+  sha256        '066133f78b250dfe9834a992e4a0f646fd78594eeb944dd17165e5ed4c2df561'
+  config_files  '/usr/local/nav/etc/db.conf', '/usr/local/nav/etc/nav.conf'
 
   build_depends 'python27', 'rubygems',
                 'automake', 'gcc', 'gcc-c++',
@@ -28,9 +29,10 @@ class Nav < FPM::Cookery::Recipe
     # fix xmpp
     safesystem 'sed -i "s/\(^xmpppy\).*/\1==0.5.0rc1/" requirements.txt'
 
-    # use pysnmp-se instead
+    # add additional dep to pynetsnmp
     safesystem 'sed -i "s/\(.*pynetsnmp-.*\)/#\1/" requirements.txt; \
-                sed -i "s/^#\(.*pysnmp-se.*\)/\1/" requirements.txt'
+                echo "git+https://github.com/zenoss/pynetsnmp" >> requirements.txt; \
+                echo "ipaddr" >> requirements.txt'
 
     safesystem 'gem install sass --no-ri --no-rdoc --version "3.3.9"'
 
