@@ -9,18 +9,16 @@ class Nav < FPM::Cookery::Recipe
   license       'GNU GPL v2'
   section       'Utilities'
 
-  version       '4.1.2'
+  version       '4.2.6'
   revision      '1'
-  source        'https://launchpad.net/nav/4.1/4.1.2/+download/nav-4.1.2.tar.gz'
-  sha256        '066133f78b250dfe9834a992e4a0f646fd78594eeb944dd17165e5ed4c2df561'
+  source        'https://launchpad.net/nav/4.2/4.2.6/+download/nav-4.2.6.tar.gz'
+  md5           'ee78c9a8272d4ae097d3c2eddd5af51f'
   config_files  '/usr/local/nav/etc/db.conf', '/usr/local/nav/etc/nav.conf'
 
-  build_depends 'python27', 'rubygems',
+  build_depends 'python-virtualenv', 'rubygems', 'git',
                 'automake', 'gcc', 'gcc-c++',
                 'subversion', 'openldap-devel',
-                'postgresql91-devel'
-
-  depends 'python27'
+                'postgresql-devel'
 
   def build
     # remove xmpp support
@@ -34,22 +32,19 @@ class Nav < FPM::Cookery::Recipe
                 echo "git+https://github.com/zenoss/pynetsnmp" >> requirements.txt; \
                 echo "ipaddr" >> requirements.txt'
 
-    safesystem 'gem install sass --no-ri --no-rdoc --version "3.3.9"'
+    safesystem 'gem install sass --no-ri --no-rdoc'
 
-    safesystem "source /opt/rh/python27/enable; \
-                virtualenv /usr/local/nav"
+    safesystem "virtualenv /usr/local/nav"
 
-    safesystem "source /opt/rh/python27/enable; \
-                source /usr/local/nav/bin/activate; \
-                env PATH=$PATH:/usr/pgsql-9.1/bin \
-                pip install -r requirements.txt"
+    safesystem "source /usr/local/nav/bin/activate; \
+                pip install -r requirements.txt --allow-external PIP"
 
-    safesystem "source /opt/rh/python27/enable; \
-                source /usr/local/nav/bin/activate; \
+    safesystem  "source /usr/local/nav/bin/activate; \
+                env PATH=/usr/local/bin:$PATH \
                 ./configure"
 
-    safesystem "source /opt/rh/python27/enable; \
-                source /usr/local/nav/bin/activate; \
+    safesystem "source /usr/local/nav/bin/activate; \
+                env PATH=/usr/local/bin:$PATH \
                 make"
 
     # Add lib/python to the search path/env
@@ -58,8 +53,7 @@ class Nav < FPM::Cookery::Recipe
   end
 
   def install
-    safesystem "source /opt/rh/python27/enable; \
-                source /usr/local/nav/bin/activate; \
+    safesystem "source /usr/local/nav/bin/activate; \
                 make install"
   end
 

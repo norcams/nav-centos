@@ -2,15 +2,15 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "centos6"
-  config.vm.box_url = "http://vagrant.unix.uib.no/centos/centos-65-x64-virtualbox-nocm.box"
-  
+  config.vm.box = "centos7"
+  config.vm.box_url = "http://vagrant.unix.uib.no/centos/uib-centos7.box"
+
   # Shared folder
   config.vm.synced_folder "./", "/vagrant"
 
   # Forward agent
   config.ssh.forward_agent = true
-  
+
   # Provider
   config.vm.provider "virtualbox" do |vbox|
     vbox.gui = false
