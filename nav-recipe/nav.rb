@@ -10,7 +10,7 @@ class Nav < FPM::Cookery::Recipe
   section       'Utilities'
 
   version       '4.2.6'
-  revision      '1'
+  revision      '3'
   source        'https://launchpad.net/nav/4.2/4.2.6/+download/nav-4.2.6.tar.gz'
   md5           'ee78c9a8272d4ae097d3c2eddd5af51f'
   config_files  '/usr/local/nav/etc/db.conf', '/usr/local/nav/etc/nav.conf'
@@ -18,7 +18,7 @@ class Nav < FPM::Cookery::Recipe
   build_depends 'python-virtualenv', 'rubygems', 'git',
                 'automake', 'gcc', 'gcc-c++',
                 'subversion', 'openldap-devel',
-                'postgresql-devel'
+                'postgresql-devel', 'ruby-devel'
 
   def build
     # remove xmpp support
@@ -32,7 +32,8 @@ class Nav < FPM::Cookery::Recipe
                 echo "git+https://github.com/zenoss/pynetsnmp" >> requirements.txt; \
                 echo "ipaddr" >> requirements.txt'
 
-    safesystem 'gem install sass --no-ri --no-rdoc'
+    safesystem 'gem install sass --version "3.2.5" --no-ri --no-rdoc ;\
+                gem install --version "~> 0.9" rb-inotify'
 
     safesystem "virtualenv /usr/local/nav"
 
@@ -50,6 +51,9 @@ class Nav < FPM::Cookery::Recipe
     # Add lib/python to the search path/env
     safesystem "echo ../../python > \
                 /usr/local/nav/lib/python2.7/site-packages/nav.pth"
+
+    # Workaround for zope.interface import problem
+    safesystem "touch /usr/local/nav/lib/python2.7/site-packages/zope/__init__.py"
   end
 
   def install
