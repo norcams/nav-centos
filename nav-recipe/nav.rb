@@ -21,9 +21,6 @@ class Nav < FPM::Cookery::Recipe
                 'postgresql-devel', 'ruby-devel'
 
   def build
-    # remove xmpp support
-    # safesystem 'sed -i \'/xmpppy/d\' requirements.txt'
-
     # fix xmpp
     safesystem 'sed -i "s/\(^xmpppy\).*/\1==0.5.0rc1/" requirements.txt'
 

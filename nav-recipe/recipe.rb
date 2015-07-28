@@ -13,12 +13,7 @@ class NavOmnibus < FPM::Cookery::Recipe
 
   omnibus_package true
   omnibus_dir     '/usr/local/nav'
-  omnibus_recipes 'repositories',
-                  'nav'
-#                  'graphite'
-#                  'mod_wsgi'
-
-#  omnibus_additional_paths '/opt/graphite'
+  omnibus_recipes 'nav'
 
   def build
     # Nothing
