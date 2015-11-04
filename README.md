@@ -8,3 +8,5 @@ To build with Vagrant (using Virtualbox), simply run
 `vagrant up`
 
 You'll find the resulting RPM file in ./nav-recipe/pkg
+
+If you would like to contribute, fork and send a pull request.
